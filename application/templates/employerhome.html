@@ -1,0 +1,64 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+<div class="row">
+
+<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-md-4">
+
+
+<br>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+  <div class="alert alert-{{category}}">
+      <p> {{ message }} </p>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<br>
+  <div class="col-md-12 order-md-1">  <h1 class="h2">Home</h1>&nbsp
+    <h4> Filters:
+      {% for i in filters %}
+        {% if i %}
+          {{i}}{{","}}
+          {% endif %}
+      {% endfor %}
+      </h4>
+    <br>
+    <div class="row">
+
+    {% for i in employee %}
+  <div class="col-sm-6">
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ i['ename']}}</h3>
+        <div class="row">
+        <div class="col-sm-8">
+        <h6>Skillset</h6><p class="card-text">{{ i['skillset']}}</p>
+        <h6>Experience</h6><p class="card-text">{{ i['experience']}} Years</p>
+        </div>
+        <div class="col-sm-4">
+        <h6>Location</h6><p class="card-text"><span class="glyphicon glyphicon-map-marker"></span>{{ i['location'] }}</p>
+        <h6>Phone number</h6><p class="card-text"><span class="glyphicon glyphicon-map-marker"></span>{{ i['phone'] }}</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  {% else %}
+  <div class="col-sm-12"><h4> No data </h4></div>
+  {% endfor %}
+
+
+</div>
+  </div>
+  </main>
+</div>
+</div>
+
+{% endblock content %}

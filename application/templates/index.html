@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Login</title>
+    <link rel="icon" href=".{{ url_for('static',filename='images/sj.jpg')}}" type="image/icon type">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+<link href=".{{ url_for('static',filename='dist/css/bootstrap.css')}}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href=".{{ url_for('static',filename='css/signin.css')}}" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <br>
+
+    <br>
+    <form class="form-signin" action="index" method="POST">
+      <img src=".{{ url_for('static',filename='images/sj.jpg')}}" style="border-radius:50%;">
+  <!--<h6 class="h5 mb-3 font-weight-normal"> Skillset and Job </h6>-->
+  <h3 class="h3 mb-3 font-weight-normal">Please Login</h3>
+  <br>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{category}}">
+            <p> {{ message }} </p>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <label class="sr-only">Username</label>
+  <input type="text" name="username" class="form-control" placeholder="Username"  autofocus>
+  <label class="sr-only">Password</label>
+  <input type="password" name="password" class="form-control" placeholder="Password" >
+  <br>
+  <div class="checkbox mb-3">
+    <input type="radio" id="employee" name="type" value="employee">
+  <label >Employee</label>
+  &nbsp &nbsp
+  <input type="radio" id="employer" name="type" value="employer">
+  <label >Employer</label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+  <br>
+  <h6> New here . !? Signup here. </h6>
+  <br>
+  <label>
+    <a href="registeremployee">Signup  as Employee</a> <br>  <a href="registeremployer">Signup as Employer</a>
+
+  </label>
+
+</form>
+</body>
+</html>

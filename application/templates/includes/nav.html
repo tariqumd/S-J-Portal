@@ -1,0 +1,132 @@
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">S&J PORTAL</a>
+<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search for Skillset,location,experience..." aria-label="Search">-->
+<ul class="navbar-nav px-3">
+<li class="nav-item text-nowrap">
+  <a class="nav-link" href="logout">Logout</a>
+</li>
+</ul>
+</nav>
+
+
+
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="sidebar-sticky pt-3">
+    {% if session['type']=="employee" %}
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Employee</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+  <!--   <span data-feather="plus-circle"></span>-->
+      </a>
+    </h6>
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link {% if employeehome %}active {% endif %}" href="employeehome">
+          <span data-feather="home"></span>
+          Home
+        </a>
+      </li>
+<!--      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="users></span>
+          users
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span data-feather="file"></span>
+          Applied
+        </a>
+      </li>-->
+      {% if employeehome %}
+      <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Filter</span>
+        </h4>
+        <li class="nav-item">
+          <form  class="nav-link" action="employeehome" method="post">
+            <input class="form-control" type="text" name="title" placeholder="Job Title" value="">
+            <br>
+            <input class="form-control" type="text" name="ename" placeholder="Employer name" value="">
+            <br>
+            <input class="form-control" type="text" name="skills" placeholder="Skills" value="">
+            <br>
+            <input class="form-control" type="text" name="loc" placeholder="Location" value="">
+            <br>
+            <input class="form-control" type="number" name="exp" placeholder="Experience" min="0" value="">
+            <br>
+            <button class="btn btn-primary" type="submit">Search</button>
+
+          </form>
+        </li>
+
+      {% endif %}
+    </ul>
+    {% endif %}
+    {% if session['type']=="employer" %}
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Employer</span>
+      <a class="d-flex align-items-center text-muted" href="#">
+  <!--   <span data-feather="plus-circle"></span>-->
+      </a>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link{% if employerhome %} active {% endif %}" href="employerhome">
+          <span data-feather="home"></span>
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if postjob %} active {% endif %}" href="postjob">
+          <span data-feather="plus-circle"></span>
+          Post new Job
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link {% if jobsposted %} active {% endif %}" href="jobsposted">
+          <span data-feather="edit"></span>
+          Edit / Delete Jobs
+        </a>
+      </li>
+      {% if employerhome %}
+      <h4 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Filter</span>
+        </h4>
+        <li class="nav-item">
+          <form  class="nav-link" action="employerhome" method="post">
+            <input class="form-control" type="text" name="skills" placeholder="Skills" value="">
+            <br>
+            <input class="form-control" type="text" name="loc" placeholder="Location" value="">
+            <br>
+            <input class="form-control" type="number" name="exp" placeholder="Experience" min="0" value="">
+            <br>
+            <button class="btn btn-primary" type="submit">Search</button>
+
+          </form>
+        </li>
+
+      {% endif %}
+    </ul>
+    {% endif %}
+  <h5 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      Logged In as: {{session['user']}}
+      </h5>
+      {% if session['type']=="employer" %}
+        <a class="nav-link {% if editemployer %} active {% endif %}" href="editemployer">
+          <span data-feather="edit"></span>
+          Edit Employer
+        </a>
+        {% elif session['type']=="employee" %}
+        <a class="nav-link {% if editemployee %} active {% endif %}" href="editemployee">
+          <span data-feather="edit"></span>
+          Edit Employee
+        </a>
+        {% endif %}
+  </div>
+</nav>

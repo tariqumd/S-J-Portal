@@ -1,0 +1,108 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+<div class="row">
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+  <br>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+    <div class="alert alert-{{category}}">
+        <p> {{ message }} </p>
+    </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div class="col-md-8 order-md-1">  <h1 class="h2">Edit Profile</h1>
+    <br>
+    <form class="needs-validation" action="editemployer" method="POST">
+      <input type="hidden" name="formname" value="employerdetails">
+        <div class="mb-3">
+          <label>Employer name</label>
+          <input type="text" class="form-control" name="empname" placeholder="Full name" value="{{session['name']}}" required>
+          <div class="invalid-feedback">
+            Employer name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label >Username <!--<span class="text-muted">(Optional)</span>--></label>
+          <input type="text" class="form-control" name="username" value="{{emp['username']}}">
+          <div class="invalid-feedback">
+            username is required
+          </div>
+        </div>
+
+
+      <div class="mb-3">
+        <label for="username">Password</label>
+        <br>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal"><span data-feather="edit"></span>Change Password</button>
+          <div class="invalid-feedback" style="width: 100%;">
+            password is required.
+          </div>
+        </div>
+
+
+
+      <hr class="mb-4">
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Save Changes</button>
+    </form>
+
+  </div>
+<hr class="mb-4">
+  </main>
+</div>
+</div>
+<!--edit form-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modal" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <br>
+
+        <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-6">
+          <h2> Change Password </h2>
+        </div>
+        </div>
+        <br>
+        <form class="needs-validation" action="editemployer" method="POST">
+        <input type="hidden" name="formname" value="password">
+        <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-8">
+          <label >Old Password <!--<span class="text-muted">(Optional)</span>--></label>
+          <input type="password" class="form-control" name="oldpass" placeholder="Old password" >
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
+          <label >New Password <!--<span class="text-muted">(Optional)</span>--></label>
+          <input type="password" class="form-control" name="newpass" placeholder="New password">
+        </div>
+        <div class="col-sm-4">
+          <label >Confirm new Password <!--<span class="text-muted">(Optional)</span>--></label>
+          <input type="password" class="form-control" name="newpasscnf" placeholder="Confirm new password">
+        </div>
+        </div>
+        <br><br>
+        <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Change Password</button>
+          <br><br>
+          </div>
+
+          </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,80 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+<div class="row">
+
+<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-md-4">
+  <br>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+    <div class="alert alert-{{category}}">
+        <p> {{ message }} </p>
+    </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div class="col-md-12 order-md-1">  <h1 class="h2">Jobs Posted</h1>
+    <br>
+    <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Employer Name</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Location</th>
+                <th scope="col">Skillset</th>
+                <th scope="col">Experience</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- Construct the rest of courses here -->
+            {% for data in jobs %}
+            <tr>
+
+                <td>{{ data["employername"] }}</td>
+                <td>{{ data["jobtitle"] }}</td>
+                <td>{{ data["jobdesc"] }}</td>
+                <td>{{ data["joblocation"] }}</td>
+                <td>{{ data["skillset"] }}</td>
+                <td>{{ data["experience"] }} Years</td>
+                <td>
+                  <form action="edjobs" method="POST">
+                    <input type="hidden" name="formname" value="edit">
+                    <input type="hidden" name="id" value= "{{data['jobid']}}" >
+                  <button type="submit" class="btn btn-success""><span data-feather="edit"></span>Edit</button>
+                  </form>
+                </td>
+                <td>
+                <form action="edjobs" method="POST">
+                  <input type="hidden" name="formname" value="delete">
+                  <input type="hidden" name="id" value= "{{data['jobid']}}" >
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+  </div>
+<hr class="mb-4">
+  </main>
+</div>
+</div>
+<!--edit form-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modal" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <h2> Edit details </h2>
+        <br>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

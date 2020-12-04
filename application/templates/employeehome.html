@@ -1,0 +1,71 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+
+<div class="container-fluid">
+<div class="row">
+
+<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-md-4">
+<br>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+  <div class="alert alert-{{category}}">
+      <p> {{ message }} </p>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+  <div class="col-md-12 order-md-1">  <h1 class="h2">Home</h1>&nbsp
+    <h4> Filters:
+      {% for i in filters %}
+        {% if i %}
+          {{i}}{{","}}
+          {% endif %}
+      {% else %}
+      None
+      {% endfor %}
+      </h4>
+    <br>
+    <div class="row">
+
+    {% for i in employer %}
+  <div class="col-sm-6">
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ i['employername']}}</h3>
+        <div class="row">
+        <div class="col-sm-8">
+          <h6>Job title</h6><p class="card-text">{{ i['jobtitle']}}</p>
+        <h6>Skillset</h6><p class="card-text">{{ i['skillset']}}</p>
+
+
+
+        </div>
+        <div class="col-sm-4">
+        <h6>Job location</h6><p class="card-text"><span class="glyphicon glyphicon-map-marker"></span>{{ i['joblocation'] }}</p>
+        <h6>Experience</h6><p class="card-text">{{ i['experience']}} Years</p>
+      <!--  <form action="applied" method="POST">
+          <input type="hidden" name="formname" value="apply">
+          <input type="hidden" name="id" value= "{{i['jobid']}}" >
+        <button type="submit" class="btn btn-success""><span data-feather="file"></span>Apply</button>
+        </form>-->
+        </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  {% else %}
+  <div class="col-sm-12"><h4> No data </h4></div>
+  {% endfor %}
+
+
+</div>
+  </div>
+  </main>
+</div>
+</div>
+
+{% endblock content %}
