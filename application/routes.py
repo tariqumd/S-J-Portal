@@ -8,7 +8,7 @@ from sqlalchemy import literal
 def index():
 
     #print(session)
-    if session:
+    if session.get('type', False) == True:
         if session['type']=="employee":
             flash("Already Logged in","warning")
             return redirect("employeehome")
@@ -417,10 +417,10 @@ def editemployee():
 
 @app.route("/registeremployee",methods=['GET','POST'])
 def registeremployee():
-    if session['type']=="employee":
+    if session.get('type', False)=="employee":
         flash("Already Logged in","warning")
         return redirect("employeehome")
-    elif session['type']=="employer":
+    elif session.get('type', False)=="employer":
         flash("Already Logged in","warning")
         return redirect("employerhome")
 
@@ -446,10 +446,10 @@ def registeremployee():
 
 @app.route("/registeremployer",methods=['GET','POST'])
 def registeremployer():
-    if session['type']=="employee":
+    if session.get('type', False)=="employee":
         flash("Already Logged in","warning")
         return redirect("employeehome")
-    elif session['type']=="employer":
+    elif session.get('type', False)=="employer":
         flash("Already Logged in","warning")
         return redirect("employerhome")
 
